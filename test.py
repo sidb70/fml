@@ -5,9 +5,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
+from config import config
 
 # 1. Load Wikipedia Data
-def load_wikipedia_data(sample_size=5000):
+def load_wikipedia_data(sample_size=config.sample_size):
     ds = tfds.load('wikipedia/20200301.en', split='train', shuffle_files=True)
     texts = []
     for example in ds.take(sample_size):  # Reduce for quick experimentation
@@ -18,7 +19,7 @@ def load_wikipedia_data(sample_size=5000):
 texts = load_wikipedia_data()
 
 # 3. Create Document Embeddings using BERT
-embedder = SentenceTransformer('sentence-transformers/multi-qa-MiniLM-L6-dot-v1', device='cuda')
+embedder = SentenceTransformer('sentence-transformers/multi-qa-MiniLM-L6-dot-v1', device=config.device)
 embeddings = embedder.encode(texts, show_progress_bar=True)
 
 # 4. Cluster Topics with BERTopic

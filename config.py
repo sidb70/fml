@@ -14,7 +14,7 @@ class Config:
 
 config_path = "config.yaml"
 
-config = None
+config: Config = None
 
 try: 
     with open(config_path, "r") as f:

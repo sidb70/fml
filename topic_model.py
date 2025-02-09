@@ -10,10 +10,12 @@ from sentence_transformers import SentenceTransformer
 from hdbscan import HDBSCAN
 from tqdm import tqdm
 
+from config import config
+
 
 class WikipediaTopicModel:
 
-    def __init__(self, model_path: str='data/topic_model', docs_path: str='data/docs', device: str = "cuda"):
+    def __init__(self, model_path: str=config.model_path, docs_path: str=config.docs_path, device: str = config.device):
         self.model_path = model_path
         self.docs_path = docs_path
         self.device = device
@@ -38,7 +40,7 @@ class WikipediaTopicModel:
             return self.train()
 
 
-    def load_and_process_wikipedia_docs(self, sample_size=5000):
+    def load_and_process_wikipedia_docs(self, sample_size=config.sample_size):
         """
         Processes and cleans the text data
         """
