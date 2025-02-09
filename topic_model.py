@@ -1,6 +1,6 @@
 import tensorflow_datasets as tfds
 import spacy
-
+import os
 from bertopic import BERTopic
 from bertopic.representation import KeyBERTInspired
 from bertopic.vectorizers import ClassTfidfTransformer
@@ -73,6 +73,8 @@ class WikipediaTopicModel:
             processed_docs.append(processed_text)
 
         # save list of documents to file
+        if not os.path.exists(os.path.dirname(self.docs_path)):
+            os.makedirs(os.path.dirname(self.docs_path))
         with open(self.docs_path, "w") as f:
             for text in processed_docs:
                 f.write(text + "\n")
@@ -136,6 +138,6 @@ class WikipediaTopicModel:
     
 
 if __name__ == "__main__":
-    topic_model = WikipediaTopicModel('data/topic_model', device='mps')
-    topic_model.train(5000)
+    topic_model = WikipediaTopicModel( device='cuda')
+    topic_model.train(50000)
 
