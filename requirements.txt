@@ -1,0 +1,7 @@
+tensorflow
+tensorflow-datasets
+bertopic
+tf-keras
+matplotlib
+scipy
+spacy
