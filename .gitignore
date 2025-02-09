@@ -171,3 +171,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+*.png
+experiments.ipynb
+model.*
+config.yaml
+data/*
