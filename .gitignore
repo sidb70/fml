@@ -172,3 +172,5 @@ cython_debug/
 
 experiments.ipynb
 model.*
+config.yaml
+data/*
