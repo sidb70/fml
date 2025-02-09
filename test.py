@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # 1. Load Wikipedia Data
-def load_wikipedia_data(sample_size=5000):
+def load_wikipedia_data(sample_size=100000):
     ds = tfds.load('wikipedia/20200301.en', split='train', shuffle_files=True)
     texts = []
     for example in ds.take(sample_size):  # Reduce for quick experimentation
@@ -52,6 +52,9 @@ for i in range(len(filtered_topics)):
             G.add_edge(filtered_topics.iloc[i]['Topic'], 
                       filtered_topics.iloc[j]['Topic'],
                       weight=similarity_matrix[i][j])
+
+# save graph
+nx.write_graphml(G, 'my_graph.graphml')
 
 
 # 8. Visualize Knowledge Graph
