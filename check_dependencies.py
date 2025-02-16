@@ -23,7 +23,7 @@ required_packages = [
     ('networkx', 'networkx'),
     ('sentence-transformers', 'sentence_transformers'),
     ('tqdm', 'tqdm'),
-    ('faiss-cpu', 'faiss'),  # faiss-cpu or faiss-gpu imports as 'faiss'
+    ('faiss-gpu', 'faiss'),  # faiss-cpu or faiss-gpu imports as 'faiss'
     ('redis', 'redis'),
     ('msgpack', 'msgpack'),
     ('xxhash', 'xxhash'),

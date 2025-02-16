@@ -4,7 +4,7 @@ Graph data models for the knowledge graph implementation.
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Dict, List, Optional, Set
-
+import pickle
 import networkx as nx
 
 @dataclass
@@ -168,3 +168,13 @@ class KnowledgeGraph:
                 neighbors.append(target)
 
         return neighbors
+    
+    def save(self, path: str) -> None:
+        """Save the knowledge graph to a file."""
+        with open(path, 'wb') as f:
+            pickle.dump(self.graph, f)
+
+    def load(self, path: str) -> None:
+        """Load the knowledge graph from a file."""
+        with open(path, 'rb') as f:
+            self.graph = pickle.load(f)
