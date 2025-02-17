@@ -21,6 +21,8 @@ class GraphSearch:
     def semantic_search(self, query: str, top_k: int = 10) -> List[Tuple[str, float]]:
         """
         Perform semantic search using text embeddings.
+
+        Time complexity: O(N) where N is the number of nodes in the graph.
         Returns list of (post_id, similarity_score) tuples.
         """
         query_embedding = self.embedding_model.encode([query])[0]
@@ -28,7 +30,7 @@ class GraphSearch:
         results = []
         for node_id, node_data in self.graph.graph.nodes(data=True):
             if node_data['type'] == 'post':
-                post_embedding = node_data['properties'].get('embedding')
+                post_embedding = node_data.get('embedding')
                 if post_embedding is not None:
                     similarity = cosine_similarity(
                         [query_embedding],
@@ -48,6 +50,8 @@ class GraphSearch:
     ) -> List[Dict]:
         """
         Search for related nodes by following specific relationship types.
+
+        Time complexity: O(N^D) where N is the average number of relationships and D is the max_depth.
         Returns list of paths with their relevance scores.
         """
         paths = []
@@ -89,6 +93,8 @@ class GraphSearch:
     ) -> List[Dict]:
         """
         Perform multi-hop search starting from semantically similar nodes.
+
+        Time complexity: O(N^H) where N is the average number of relationships and H is the max_hops.
         """
         # First find semantically similar posts
         initial_results = self.semantic_search(query, top_k=5)
